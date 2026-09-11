@@ -12,11 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppAlertsRouteImport } from './routes/app.alerts'
 import { Route as AppAnalyticsRouteImport } from './routes/app.analytics'
 import { Route as AppAnalyzeRouteImport } from './routes/app.analyze'
 import { Route as AppApiRouteImport } from './routes/app.api'
+import { Route as AppAssistantRouteImport } from './routes/app.assistant'
 import { Route as AppAuditRouteImport } from './routes/app.audit'
 import { Route as AppHistoryRouteImport } from './routes/app.history'
 import { Route as AppLiveRouteImport } from './routes/app.live'
@@ -38,6 +40,11 @@ const AppRoute = AppRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
@@ -63,6 +70,11 @@ const AppAnalyzeRoute = AppAnalyzeRouteImport.update({
 const AppApiRoute = AppApiRouteImport.update({
   id: '/api',
   path: '/api',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAssistantRoute = AppAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
   getParentRoute: () => AppRoute,
 } as any)
 const AppAuditRoute = AppAuditRouteImport.update({
@@ -105,10 +117,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/api/chat': typeof ApiChatRoute
   '/app/alerts': typeof AppAlertsRoute
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/analyze': typeof AppAnalyzeRoute
   '/app/api': typeof AppApiRoute
+  '/app/assistant': typeof AppAssistantRoute
   '/app/audit': typeof AppAuditRoute
   '/app/history': typeof AppHistoryRoute
   '/app/live': typeof AppLiveRoute
@@ -121,10 +135,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/api/chat': typeof ApiChatRoute
   '/app/alerts': typeof AppAlertsRoute
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/analyze': typeof AppAnalyzeRoute
   '/app/api': typeof AppApiRoute
+  '/app/assistant': typeof AppAssistantRoute
   '/app/audit': typeof AppAuditRoute
   '/app/history': typeof AppHistoryRoute
   '/app/live': typeof AppLiveRoute
@@ -139,10 +155,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/api/chat': typeof ApiChatRoute
   '/app/alerts': typeof AppAlertsRoute
   '/app/analytics': typeof AppAnalyticsRoute
   '/app/analyze': typeof AppAnalyzeRoute
   '/app/api': typeof AppApiRoute
+  '/app/assistant': typeof AppAssistantRoute
   '/app/audit': typeof AppAuditRoute
   '/app/history': typeof AppHistoryRoute
   '/app/live': typeof AppLiveRoute
@@ -158,10 +176,12 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/auth'
+    | '/api/chat'
     | '/app/alerts'
     | '/app/analytics'
     | '/app/analyze'
     | '/app/api'
+    | '/app/assistant'
     | '/app/audit'
     | '/app/history'
     | '/app/live'
@@ -174,10 +194,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/api/chat'
     | '/app/alerts'
     | '/app/analytics'
     | '/app/analyze'
     | '/app/api'
+    | '/app/assistant'
     | '/app/audit'
     | '/app/history'
     | '/app/live'
@@ -191,10 +213,12 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/auth'
+    | '/api/chat'
     | '/app/alerts'
     | '/app/analytics'
     | '/app/analyze'
     | '/app/api'
+    | '/app/assistant'
     | '/app/audit'
     | '/app/history'
     | '/app/live'
@@ -209,6 +233,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -232,6 +257,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app/': {
@@ -267,6 +299,13 @@ declare module '@tanstack/react-router' {
       path: '/api'
       fullPath: '/app/api'
       preLoaderRoute: typeof AppApiRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/assistant': {
+      id: '/app/assistant'
+      path: '/assistant'
+      fullPath: '/app/assistant'
+      preLoaderRoute: typeof AppAssistantRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/audit': {
@@ -326,6 +365,7 @@ interface AppRouteChildren {
   AppAnalyticsRoute: typeof AppAnalyticsRoute
   AppAnalyzeRoute: typeof AppAnalyzeRoute
   AppApiRoute: typeof AppApiRoute
+  AppAssistantRoute: typeof AppAssistantRoute
   AppAuditRoute: typeof AppAuditRoute
   AppHistoryRoute: typeof AppHistoryRoute
   AppLiveRoute: typeof AppLiveRoute
@@ -341,6 +381,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAnalyticsRoute: AppAnalyticsRoute,
   AppAnalyzeRoute: AppAnalyzeRoute,
   AppApiRoute: AppApiRoute,
+  AppAssistantRoute: AppAssistantRoute,
   AppAuditRoute: AppAuditRoute,
   AppHistoryRoute: AppHistoryRoute,
   AppLiveRoute: AppLiveRoute,
@@ -357,6 +398,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
