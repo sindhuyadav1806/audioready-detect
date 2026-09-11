@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAnalyzeRouteImport } from './routes/app.analyze'
+import { Route as AppHistoryRouteImport } from './routes/app.history'
+import { Route as AppLiveRouteImport } from './routes/app.live'
 import { Route as AppResultRouteImport } from './routes/app.result'
 import { Route as AppVerificationRouteImport } from './routes/app.verification'
 
@@ -30,6 +33,21 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAnalyzeRoute = AppAnalyzeRouteImport.update({
+  id: '/analyze',
+  path: '/analyze',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHistoryRoute = AppHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLiveRoute = AppLiveRouteImport.update({
+  id: '/live',
+  path: '/live',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppResultRoute = AppResultRouteImport.update({
   id: '/result',
   path: '/result',
@@ -44,12 +62,18 @@ const AppVerificationRoute = AppVerificationRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/app/analyze': typeof AppAnalyzeRoute
+  '/app/history': typeof AppHistoryRoute
+  '/app/live': typeof AppLiveRoute
   '/app/result': typeof AppResultRoute
   '/app/verification': typeof AppVerificationRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app/analyze': typeof AppAnalyzeRoute
+  '/app/history': typeof AppHistoryRoute
+  '/app/live': typeof AppLiveRoute
   '/app/result': typeof AppResultRoute
   '/app/verification': typeof AppVerificationRoute
   '/app': typeof AppIndexRoute
@@ -58,16 +82,43 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/app/analyze': typeof AppAnalyzeRoute
+  '/app/history': typeof AppHistoryRoute
+  '/app/live': typeof AppLiveRoute
   '/app/result': typeof AppResultRoute
   '/app/verification': typeof AppVerificationRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/app/result' | '/app/verification' | '/app/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/app/analyze'
+    | '/app/history'
+    | '/app/live'
+    | '/app/result'
+    | '/app/verification'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app/result' | '/app/verification' | '/app'
-  id: '__root__' | '/' | '/app' | '/app/result' | '/app/verification' | '/app/'
+  to:
+    | '/'
+    | '/app/analyze'
+    | '/app/history'
+    | '/app/live'
+    | '/app/result'
+    | '/app/verification'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/app/analyze'
+    | '/app/history'
+    | '/app/live'
+    | '/app/result'
+    | '/app/verification'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -98,6 +149,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/analyze': {
+      id: '/app/analyze'
+      path: '/analyze'
+      fullPath: '/app/analyze'
+      preLoaderRoute: typeof AppAnalyzeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/history': {
+      id: '/app/history'
+      path: '/history'
+      fullPath: '/app/history'
+      preLoaderRoute: typeof AppHistoryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/live': {
+      id: '/app/live'
+      path: '/live'
+      fullPath: '/app/live'
+      preLoaderRoute: typeof AppLiveRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/result': {
       id: '/app/result'
       path: '/result'
@@ -116,12 +188,18 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppAnalyzeRoute: typeof AppAnalyzeRoute
+  AppHistoryRoute: typeof AppHistoryRoute
+  AppLiveRoute: typeof AppLiveRoute
   AppResultRoute: typeof AppResultRoute
   AppVerificationRoute: typeof AppVerificationRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAnalyzeRoute: AppAnalyzeRoute,
+  AppHistoryRoute: AppHistoryRoute,
+  AppLiveRoute: AppLiveRoute,
   AppResultRoute: AppResultRoute,
   AppVerificationRoute: AppVerificationRoute,
   AppIndexRoute: AppIndexRoute,
