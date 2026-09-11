@@ -22,7 +22,7 @@ export const Route = createFileRoute("/app/api")({
       { property: "og:description", content: "Developer reference for the VoxShield voice integrity API." },
     ],
   }),
-  component: ApiIntegration;
+  component: ApiIntegration,
 });
 
 const ENDPOINTS = [
