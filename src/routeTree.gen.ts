@@ -10,33 +10,205 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/app'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAlertsRouteImport } from './routes/app.alerts'
+import { Route as AppAnalyticsRouteImport } from './routes/app.analytics'
+import { Route as AppAnalyzeRouteImport } from './routes/app.analyze'
+import { Route as AppApiRouteImport } from './routes/app.api'
+import { Route as AppAuditRouteImport } from './routes/app.audit'
+import { Route as AppHistoryRouteImport } from './routes/app.history'
+import { Route as AppLiveRouteImport } from './routes/app.live'
+import { Route as AppPrivacyRouteImport } from './routes/app.privacy'
+import { Route as AppResultRouteImport } from './routes/app.result'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppVerificationRouteImport } from './routes/app.verification'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAlertsRoute = AppAlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalyzeRoute = AppAnalyzeRouteImport.update({
+  id: '/analyze',
+  path: '/analyze',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppApiRoute = AppApiRouteImport.update({
+  id: '/api',
+  path: '/api',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAuditRoute = AppAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHistoryRoute = AppHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLiveRoute = AppLiveRouteImport.update({
+  id: '/live',
+  path: '/live',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPrivacyRoute = AppPrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppResultRoute = AppResultRouteImport.update({
+  id: '/result',
+  path: '/result',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVerificationRoute = AppVerificationRouteImport.update({
+  id: '/verification',
+  path: '/verification',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/app/alerts': typeof AppAlertsRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/analyze': typeof AppAnalyzeRoute
+  '/app/api': typeof AppApiRoute
+  '/app/audit': typeof AppAuditRoute
+  '/app/history': typeof AppHistoryRoute
+  '/app/live': typeof AppLiveRoute
+  '/app/privacy': typeof AppPrivacyRoute
+  '/app/result': typeof AppResultRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/verification': typeof AppVerificationRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/app/alerts': typeof AppAlertsRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/analyze': typeof AppAnalyzeRoute
+  '/app/api': typeof AppApiRoute
+  '/app/audit': typeof AppAuditRoute
+  '/app/history': typeof AppHistoryRoute
+  '/app/live': typeof AppLiveRoute
+  '/app/privacy': typeof AppPrivacyRoute
+  '/app/result': typeof AppResultRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/verification': typeof AppVerificationRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/app/alerts': typeof AppAlertsRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/analyze': typeof AppAnalyzeRoute
+  '/app/api': typeof AppApiRoute
+  '/app/audit': typeof AppAuditRoute
+  '/app/history': typeof AppHistoryRoute
+  '/app/live': typeof AppLiveRoute
+  '/app/privacy': typeof AppPrivacyRoute
+  '/app/result': typeof AppResultRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/verification': typeof AppVerificationRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/app/alerts'
+    | '/app/analytics'
+    | '/app/analyze'
+    | '/app/api'
+    | '/app/audit'
+    | '/app/history'
+    | '/app/live'
+    | '/app/privacy'
+    | '/app/result'
+    | '/app/settings'
+    | '/app/verification'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/app/alerts'
+    | '/app/analytics'
+    | '/app/analyze'
+    | '/app/api'
+    | '/app/audit'
+    | '/app/history'
+    | '/app/live'
+    | '/app/privacy'
+    | '/app/result'
+    | '/app/settings'
+    | '/app/verification'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/auth'
+    | '/app/alerts'
+    | '/app/analytics'
+    | '/app/analyze'
+    | '/app/api'
+    | '/app/audit'
+    | '/app/history'
+    | '/app/live'
+    | '/app/privacy'
+    | '/app/result'
+    | '/app/settings'
+    | '/app/verification'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +220,143 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/alerts': {
+      id: '/app/alerts'
+      path: '/alerts'
+      fullPath: '/app/alerts'
+      preLoaderRoute: typeof AppAlertsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/analytics': {
+      id: '/app/analytics'
+      path: '/analytics'
+      fullPath: '/app/analytics'
+      preLoaderRoute: typeof AppAnalyticsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/analyze': {
+      id: '/app/analyze'
+      path: '/analyze'
+      fullPath: '/app/analyze'
+      preLoaderRoute: typeof AppAnalyzeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/api': {
+      id: '/app/api'
+      path: '/api'
+      fullPath: '/app/api'
+      preLoaderRoute: typeof AppApiRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/audit': {
+      id: '/app/audit'
+      path: '/audit'
+      fullPath: '/app/audit'
+      preLoaderRoute: typeof AppAuditRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/history': {
+      id: '/app/history'
+      path: '/history'
+      fullPath: '/app/history'
+      preLoaderRoute: typeof AppHistoryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/live': {
+      id: '/app/live'
+      path: '/live'
+      fullPath: '/app/live'
+      preLoaderRoute: typeof AppLiveRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/privacy': {
+      id: '/app/privacy'
+      path: '/privacy'
+      fullPath: '/app/privacy'
+      preLoaderRoute: typeof AppPrivacyRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/result': {
+      id: '/app/result'
+      path: '/result'
+      fullPath: '/app/result'
+      preLoaderRoute: typeof AppResultRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/verification': {
+      id: '/app/verification'
+      path: '/verification'
+      fullPath: '/app/verification'
+      preLoaderRoute: typeof AppVerificationRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAlertsRoute: typeof AppAlertsRoute
+  AppAnalyticsRoute: typeof AppAnalyticsRoute
+  AppAnalyzeRoute: typeof AppAnalyzeRoute
+  AppApiRoute: typeof AppApiRoute
+  AppAuditRoute: typeof AppAuditRoute
+  AppHistoryRoute: typeof AppHistoryRoute
+  AppLiveRoute: typeof AppLiveRoute
+  AppPrivacyRoute: typeof AppPrivacyRoute
+  AppResultRoute: typeof AppResultRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppVerificationRoute: typeof AppVerificationRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAlertsRoute: AppAlertsRoute,
+  AppAnalyticsRoute: AppAnalyticsRoute,
+  AppAnalyzeRoute: AppAnalyzeRoute,
+  AppApiRoute: AppApiRoute,
+  AppAuditRoute: AppAuditRoute,
+  AppHistoryRoute: AppHistoryRoute,
+  AppLiveRoute: AppLiveRoute,
+  AppPrivacyRoute: AppPrivacyRoute,
+  AppResultRoute: AppResultRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppVerificationRoute: AppVerificationRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
