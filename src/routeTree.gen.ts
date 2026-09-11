@@ -10,33 +10,69 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/app'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppResultRouteImport } from './routes/app.result'
+import { Route as AppVerificationRouteImport } from './routes/app.verification'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppResultRoute = AppResultRouteImport.update({
+  id: '/result',
+  path: '/result',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVerificationRoute = AppVerificationRouteImport.update({
+  id: '/verification',
+  path: '/verification',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/app/result': typeof AppResultRoute
+  '/app/verification': typeof AppVerificationRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app/result': typeof AppResultRoute
+  '/app/verification': typeof AppVerificationRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/app/result': typeof AppResultRoute
+  '/app/verification': typeof AppVerificationRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/app' | '/app/result' | '/app/verification' | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/app/result' | '/app/verification' | '/app'
+  id: '__root__' | '/' | '/app' | '/app/result' | '/app/verification' | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +84,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/result': {
+      id: '/app/result'
+      path: '/result'
+      fullPath: '/app/result'
+      preLoaderRoute: typeof AppResultRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/verification': {
+      id: '/app/verification'
+      path: '/verification'
+      fullPath: '/app/verification'
+      preLoaderRoute: typeof AppVerificationRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppResultRoute: typeof AppResultRoute
+  AppVerificationRoute: typeof AppVerificationRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppResultRoute: AppResultRoute,
+  AppVerificationRoute: AppVerificationRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
