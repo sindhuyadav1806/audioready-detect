@@ -19,6 +19,7 @@ import {
 } from "@/components/ai-elements/prompt-input";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Button } from "@/components/ui/button";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { classificationLabel } from "@/services/riskScoringService";
 import { useApp } from "@/lib/store";
 
@@ -100,6 +101,7 @@ export function SecurityAssistant() {
   }
 
   return (
+    <TooltipProvider>
     <div className="glass flex h-[calc(100vh-14rem)] min-h-[520px] flex-col rounded-2xl">
       <div className="flex items-center justify-between gap-3 border-b border-border/60 px-5 py-3">
         <div>
@@ -178,5 +180,6 @@ export function SecurityAssistant() {
         </PromptInput>
       </div>
     </div>
+    </TooltipProvider>
   );
 }
